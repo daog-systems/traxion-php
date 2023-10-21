@@ -37,4 +37,8 @@ print_pre($r, '<span class="text-success">Output</span>');
 echo "<img src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$qr&choe=UTF-8'><br>";
 
 $r = $traxion->bank_transfer_qr_check($username, $password, $qr);
-print_pre($r);
+print_pre($r, '<span class="text-success">Output</span>');
+
+$referenceNumber = '211000';
+$r = $traxion->details_merchant_reference($username, $password, $referenceNumber);
+print_pre($r, '<span class="text-success">Output</span>');
