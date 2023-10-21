@@ -1,3 +1,14 @@
+<style>
+  .text-danger {
+    color: #dc3545;
+  }
+  .text-info {
+    color: #17a2b8;
+  }
+  .text-success {
+    color: #28a745;
+  }
+</style>
 <?php
 
 require_once('helper.php');
