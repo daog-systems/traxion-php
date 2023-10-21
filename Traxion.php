@@ -301,10 +301,11 @@ class Traxion {
     return $this->get_response($this->post($request_url, $data, $headers));
   }
 
-  function transaction_history($username, $password, $walletCode, $page = 1, $limit = 25) {
+  function transaction_history($username, $password, $page = 1, $limit = 25) {
     $r = $this->login_thirdparty($username, $password);
     $accessToken = $r->data->accessToken;
     $secretKey = $r->data->secretKey;
+    $walletCode = $r->data->walletCode;
 
     $request_url = $this->url .  '/api/v1/users/thirdparty/transactions/history';
 
