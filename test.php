@@ -32,8 +32,8 @@ $traxion->init($url, $secretKey, true);
 // $r = $traxion->wallet($username, $password); // OK
 // print_pre($r, '<span class="text-success">Output</span>');
 
-// $batchIdentifier = "batch-may-2-1"; // TODO: Where the fuck these come from???
-// $institutionID = 37225;
+// $batchIdentifier = "batch-may-2-1";
+// $institutionID = 37225; // TODO: Where to get these?
 // $accountNumber = "09267912280";
 // $merchantReferenceNumber = "09267912280";
 // $amount = 100;
@@ -56,12 +56,12 @@ $traxion->init($url, $secretKey, true);
 // $r = $traxion->bank_transfer_qr_check($username, $password, $qr); // OK
 // print_pre($r, '<span class="text-success">Output</span>');
 
-// $qr = '00020101021228780011ph.ppmi.p2m0111TRXPPHM2XXX03171016202300004685604161001173251356404050300052046016530360854041.005802PH5907OLYMPUS6010PASIG CITY623505062110000014D00KF0QIXBSQHH0803***88490012ph.ppmi.qrph0129006395677194150211BCPIPHSSXXX63048A2D';
-// $merchantReferenceNumber = '';
-// $amount = 1;
-// $description = '';
-// $r = $traxion->bank_transfer_qr($username, $password, $qr, $merchantReferenceNumber, $amount, $description);
-// print_pre($r, '<span class="text-success">Output</span>');
+$qr = '00020101021228780011ph.ppmi.p2m0111TRXPPHM2XXX03171016202300004685604161001173251356404050300052046016530360854041.005802PH5907OLYMPUS6010PASIG CITY623505062110000014D00KF0QIXBSQHH0803***88490012ph.ppmi.qrph0129006395677194150211BCPIPHSSXXX63048A2D';
+$merchantReferenceNumber = ''; // TODO: Where to get this?
+$amount = 1;
+$description = '';
+$r = $traxion->bank_transfer_qr($username, $password, $qr, $merchantReferenceNumber, $amount, $description);
+print_pre($r, '<span class="text-success">Output</span>');
 
 // $referenceNumber = '211000'; // TODO: Where to get this?
 // $r = $traxion->details_merchant_reference($username, $password, $referenceNumber);
