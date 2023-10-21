@@ -131,9 +131,7 @@ class Traxion {
       // 'batchIdentifier' => $batchIdentifier,
       'qr' => $batchIdentifier,
     );
-    $totp = my_totp_now($secretKey);
-    $json_params = json_encode($params);
-    $encrypted_data = gibberish_aes_encrypt($json_params,  $totp);
+    $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
 
     $data = array('data' => $encrypted_data);
     $headers[] = 'Content-Type: application/json';
@@ -154,9 +152,7 @@ class Traxion {
       'amount' => $amount,
       'description' => $description,
     );
-    $totp = my_totp_now($secretKey);
-    $json_params = json_encode($params);
-    $encrypted_data = gibberish_aes_encrypt($json_params,  $totp);
+    $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
 
     $data = array('data' => $encrypted_data);
     $headers[] = 'Content-Type: application/json';
@@ -188,9 +184,7 @@ class Traxion {
     $params = array(
       'referenceNumber' => $referenceNumber
     );
-    $totp = my_totp_now($secretKey);
-    $json_params = json_encode($params);
-    $encrypted_data = gibberish_aes_encrypt($json_params,  $totp);
+    $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
 
     $data = array('data' => $encrypted_data);
     $headers[] = 'Content-Type: application/json';
@@ -204,9 +198,7 @@ class Traxion {
     $params = array(
       'referenceNumber' => $referenceNumber
     );
-    $totp = my_totp_now($secretKey);
-    $json_params = json_encode($params);
-    $encrypted_data = gibberish_aes_encrypt($json_params,  $totp);
+    $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
 
     $data = array('data' => $encrypted_data);
     $headers[] = 'Content-Type: application/json';
@@ -281,7 +273,7 @@ class Traxion {
     $data = array('data' => $encrypted_data);
     $headers[] = 'Content-Type: application/json';
     $headers[] = 'Authorization: Bearer ' . $accessToken;
-    return $this->get_response($this->post($request_url, array(), $headers));
+    return $this->get_response($this->post($request_url, $data, $headers));
   }
 
   function payment_categories($username, $password) {
@@ -309,9 +301,7 @@ class Traxion {
       'limit' => 2,
       'status' => null,
     );
-    $totp = my_totp_now($secretKey);
-    $json_params = json_encode($params);
-    $encrypted_data = gibberish_aes_encrypt($json_params,  $totp);
+    $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
 
     $data = array('data' => $encrypted_data);
     $headers[] = 'Content-Type: application/json';
