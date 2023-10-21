@@ -213,7 +213,8 @@ class Traxion {
     return $this->get_response($this->post($request_url, $data, $headers));
   }
 
-  function cash_in_gcash($username, $password, $amount) {
+  // TODO: Default values are from the documentation
+  function cash_in_gcash($username, $password, $amount, $paymentMethod = 'BOG', $paymentCategoryGroupID = 6, $institutionID = 584, $aggregatorID = 8) {
     $r = $this->login_thirdparty($username, $password);
     $accessToken = $r->data->accessToken;
     $secretKey = $r->data->secretKey;
@@ -227,15 +228,15 @@ class Traxion {
       'walletCode' => $walletCode,
       'transactionDetails' => array(
         array(
-          'paymentMethod' => 'BOG',
+          'paymentMethod' => $paymentMethod,
           'amount' => $amount,
           'description' => '',
           'email' => '',
           'firstName' => '',
           'lastName' => '',
-          'paymentCategoryGroupID' => 6,
-          'institutionID' => 584,
-          'aggregatorID' => 8,
+          'paymentCategoryGroupID' => $paymentCategoryGroupID,
+          'institutionID' => $institutionID,
+          'aggregatorID' => $aggregatorID,
         )
       ),
     );
@@ -247,7 +248,8 @@ class Traxion {
     return $this->get_response($this->post($request_url, $data, $headers));
   }
 
-  function cash_in_gcash_fee($username, $password, $amount) {
+  // TODO: Default values are from the documentation
+  function cash_in_gcash_fee($username, $password, $amount, $institutionId = 13058, $aggregatorId = 11) {
     $r = $this->login_thirdparty($username, $password);
     $accessToken = $r->data->accessToken;
     $secretKey = $r->data->secretKey;
@@ -255,8 +257,8 @@ class Traxion {
     $request_url = $this->url . '/api/v1/transactions/external/funds/cash-in/gcash/fee';
 
     $params = array(
-      'institutionId' => 13058,
-      'aggregatorId' => 11,
+      'institutionId' => $institutionId,
+      'aggregatorId' => $aggregatorId,
       'amount' => $amount,
     );
     $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
