@@ -8,9 +8,9 @@ class Traxion {
     $this->debug = $debug;
   }
 
-  function init($url, $secret_key, $debug) {
+  function init($url, $secretKey, $debug) {
     $this->url = $url;
-    $this->secret_key = $secret_key;
+    $this->secretKey = $secretKey;
     $this->debug = $debug;
   }
 
@@ -23,14 +23,14 @@ class Traxion {
       'applicationId' => 1
     );
 
-    $encrypted_data = $this->params_to_encrypted_data($params, $this->secret_key);
+    $encrypted_data = $this->params_to_encrypted_data($params, $this->secretKey);
     $data = array('data' => $encrypted_data);
 
     $headers[] = 'Content-Type: application/json';
 
     $output = $this->get_response($this->post($request_url, $data, $headers));
     if ($this->debug) {
-      print_pre($output, 'output');
+      print_pre($output, '<span class="text-success">Output</span>');
     }
     return $output;
   }
@@ -110,7 +110,6 @@ class Traxion {
 
     $params = array(
       'amount' => $amount,
-      'ref_no' => 'lalala',
     );
     $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
 
@@ -178,7 +177,11 @@ class Traxion {
     return $this->get_response($this->post($request_url, $data, $headers));
   }
 
-  function details_aggregator($accessToken, $referenceNumber, $secretKey) {
+  function details_aggregator($username, $password, $referenceNumber) {
+    $r = $this->login_thirdparty($username, $password);
+    $accessToken = $r->data->accessToken;
+    $secretKey = $r->data->secretKey;
+
     $request_url = $this->url . '/api/v1/transactions/details/aggregator';
 
     $params = array(
@@ -192,7 +195,11 @@ class Traxion {
     return $this->get_response($this->post($request_url, $data, $headers));
   }
 
-  function details_batch($accessToken, $referenceNumber, $secretKey) {
+  function details_batch($username, $password, $referenceNumber) {
+    $r = $this->login_thirdparty($username, $password);
+    $accessToken = $r->data->accessToken;
+    $secretKey = $r->data->secretKey;
+
     $request_url = $this->url . '/api/v1/transactions/details/batch';
 
     $params = array(
@@ -292,13 +299,17 @@ class Traxion {
     return $this->get_response($this->post($request_url, $data, $headers));
   }
 
-  function transaction_history($accessToken, $walletCode, $secretKey) {
+  function transaction_history($username, $password, $walletCode, $page = 1, $limit = 25) {
+    $r = $this->login_thirdparty($username, $password);
+    $accessToken = $r->data->accessToken;
+    $secretKey = $r->data->secretKey;
+
     $request_url = $this->url .  '/api/v1/users/thirdparty/transactions/history';
 
     $params = array(
       'walletCode' => $walletCode,
-      'page' => 1,
-      'limit' => 2,
+      'page' => $page,
+      'limit' => $limit,
       'status' => null,
     );
     $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
@@ -311,7 +322,7 @@ class Traxion {
 
   function params_to_encrypted_data($params, $secretKey) {
     if ($this->debug) {
-      print_pre($params, 'params');
+      print_pre($params, '<span class="text-info">Parameters</span>');
     }
     $totp = my_totp_now($secretKey);
     $json_params = json_encode($params);
@@ -323,9 +334,9 @@ class Traxion {
     $ch = curl_init();
 
     if ($this->debug) {
-      echo $request_url . '<br>';
-      print_pre($headers);
-      print_pre($data);
+      echo '<p class="text-danger">Requesting ' . $request_url . '</p>';
+      print_pre($headers, '<span class="text-danger">Headers</span>');
+      print_pre($data, '<span class="text-danger">Encrypted Data</span>');
     }
     curl_setopt($ch, CURLOPT_URL, $request_url);
     curl_setopt($ch, CURLOPT_POST, 1);
