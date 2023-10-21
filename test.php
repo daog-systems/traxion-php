@@ -23,7 +23,7 @@ $merchantCode = '';
 $accountNumber = '';
 $secretKey = '';
 
-$traxion = new Traxion(true);
+$traxion = new Traxion();
 $traxion->init($url, $secretKey, true);
 
 $r = $traxion->account_number($username, $password);
