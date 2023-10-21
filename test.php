@@ -8,7 +8,8 @@ $username = '';
 $password = '';
 $secret_key = '';
 
-$traxion = new Traxion();
-$traxion->init($url, $secret_key);
+$traxion = new Traxion(true);
+$traxion->init($url, $secret_key, true);
 
-$r = $traxion->login_thirdparty($username, $password);
+$r = $traxion->account_number($username, $password);
+print_pre($r);
