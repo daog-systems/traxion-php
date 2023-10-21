@@ -27,12 +27,12 @@ $traxion = new Traxion(true);
 $traxion->init($url, $secretKey, true);
 
 $r = $traxion->account_number($username, $password);
-print_pre($r);
+print_pre($r, '<span class="text-success">Output</span>');
 
 $amount = 1;
 $r = $traxion->qr_generate_merchant($username, $password, $amount);
 $qr = $r->data->rawString;
-print_pre($r);
+print_pre($r, '<span class="text-success">Output</span>');
 
 echo "<img src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$qr&choe=UTF-8'><br>";
 
