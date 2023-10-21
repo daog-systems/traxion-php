@@ -4,13 +4,14 @@ define('TRAXION_APPLICATION_ID', 1);
 
 class Traxion {
 
-  function __construct() {
-    $this->debug = true;
+  function __construct($debug = false) {
+    $this->debug = $debug;
   }
 
-  function init($url, $secret_key) {
+  function init($url, $secret_key, $debug) {
     $this->url = $url;
     $this->secret_key = $secret_key;
+    $this->debug = $debug;
   }
 
   function login_thirdparty($username, $password) {
