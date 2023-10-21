@@ -16,11 +16,11 @@ require_once('Traxion.php');
 
 $url = 'https://sitapi2.traxionpay.com';
 $username = '';
+$apiKey = ''; // Use this as password
 // $password = '';
-$password = '';
+$password = $apiKey;
 $merchantCode = '';
 $accountNumber = '';
-$apiKey = ''; // Use this as password
 $secretKey = '';
 
 $traxion = new Traxion(true);
