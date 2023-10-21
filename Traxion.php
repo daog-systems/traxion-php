@@ -59,7 +59,7 @@ class Traxion {
   function funds_transfer_bulk($username, $password, $batchIdentifier = "batch-may-2-1", 
       $institutionID = 37225, $accountNumber = "09267912280", $merchantReferenceNumber = "09267912280", 
       $amount = 100, $recipientName = "Floyd Matabilas", $mobileNumber = "09267912280", $tag = 1,
-      $notifyRecipient = 1, $purpose = 1) {
+      $notifyRecipient = 1, $purpose = 1, $message = '') {
 
     $r = $this->login_thirdparty($username, $password);
     $accessToken = $r->data->accessToken;
@@ -78,6 +78,7 @@ class Traxion {
       'tag' => $tag,
       'notifyRecipient' => $notifyRecipient,
       'purpose' => $purpose,
+      'message' => $message,
     );
     $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
 
