@@ -330,6 +330,28 @@ class Traxion {
     return $encrypted_data;
   }
 
+  function get($request_url, $data, $headers) {
+    $ch = curl_init();
+
+    $params =  http_build_query($data);
+    $request_url_with_params = $request_url . '?' . $params;
+    if ($this->debug) {
+      echo '<p class="text-danger">Requesting ' . $request_url . '</p>';
+      print_pre($headers, '<span class="text-danger">Headers</span>');
+      print_pre($params, '<span class="text-danger">Parameters</span>');
+    }
+    curl_setopt($ch, CURLOPT_URL, $request_url_with_params);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_HTTPGET, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $output = curl_exec($ch);
+
+    curl_close($ch);
+    return $output;
+  }
+
   function post($request_url, $data, $headers) {
     $ch = curl_init();
 
