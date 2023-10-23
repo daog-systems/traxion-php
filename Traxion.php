@@ -56,8 +56,8 @@ class Traxion {
   }
 
   // TODO: Default values are from the documentation
-  function funds_transfer_bulk($username, $password, $batchIdentifier = "batch-may-2-1", 
-      $institutionID = 37225, $accountNumber = "09267912280", $merchantReferenceNumber = "09267912280", 
+  function funds_transfer_bulk($username, $password, $batchIdentifier = "batch-may-2-1",
+      $institutionID = 37225, $accountNumber = "09267912280", $merchantReferenceNumber = "09267912280",
       $amount = 100, $recipientName = "Floyd Matabilas", $mobileNumber = "09267912280", $tag = 1,
       $notifyRecipient = 1, $purpose = 1, $message = '') {
 
