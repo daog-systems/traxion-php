@@ -29,7 +29,7 @@ class Traxion {
 
     $output = $this->get_response($this->post($request_url, $data, $headers));
     if ($this->debug) {
-      print_pre($output, '<span class="text-success">Output</span>');
+      $this->print_pre($output, '<span class="text-success">Output</span>');
     }
     return $output;
   }
@@ -321,7 +321,7 @@ class Traxion {
 
   private function params_to_encrypted_data($params, $secretKey) {
     if ($this->debug) {
-      print_pre($params, '<span class="text-info">Parameters</span>');
+      $this->print_pre($params, '<span class="text-info">Parameters</span>');
     }
     $totp = my_totp_now($secretKey);
     $json_params = json_encode($params);
@@ -336,8 +336,8 @@ class Traxion {
     $request_url_with_params = $request_url . '?' . $params;
     if ($this->debug) {
       echo '<p class="text-danger">Requesting ' . $request_url . '</p>';
-      print_pre($headers, '<span class="text-danger">Headers</span>');
-      print_pre($params, '<span class="text-danger">Parameters</span>');
+      $this->print_pre($headers, '<span class="text-danger">Headers</span>');
+      $this->print_pre($params, '<span class="text-danger">Parameters</span>');
     }
     curl_setopt($ch, CURLOPT_URL, $request_url_with_params);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -356,8 +356,8 @@ class Traxion {
 
     if ($this->debug) {
       echo '<p class="text-danger">Requesting ' . $request_url . '</p>';
-      print_pre($headers, '<span class="text-danger">Headers</span>');
-      print_pre($data, '<span class="text-danger">Encrypted Data</span>');
+      $this->print_pre($headers, '<span class="text-danger">Headers</span>');
+      $this->print_pre($data, '<span class="text-danger">Encrypted Data</span>');
     }
     curl_setopt($ch, CURLOPT_URL, $request_url);
     curl_setopt($ch, CURLOPT_POST, 1);
@@ -376,6 +376,13 @@ class Traxion {
       $response = json_decode($response);
     // }
     return $response;
+  }
+
+  private function print_pre($text, $pre_text = '') {
+    echo $pre_text;
+    echo '<pre>';
+    print_r($text);
+    echo '</pre>';
   }
 
 }
