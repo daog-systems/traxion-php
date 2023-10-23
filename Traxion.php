@@ -320,7 +320,7 @@ class Traxion {
     return $this->get_response($this->post($request_url, $data, $headers));
   }
 
-  function params_to_encrypted_data($params, $secretKey) {
+  private function params_to_encrypted_data($params, $secretKey) {
     if ($this->debug) {
       print_pre($params, '<span class="text-info">Parameters</span>');
     }
@@ -330,7 +330,7 @@ class Traxion {
     return $encrypted_data;
   }
 
-  function get($request_url, $data, $headers) {
+  private function get($request_url, $data, $headers) {
     $ch = curl_init();
 
     $params =  http_build_query($data);
@@ -352,7 +352,7 @@ class Traxion {
     return $output;
   }
 
-  function post($request_url, $data, $headers) {
+  private function post($request_url, $data, $headers) {
     $ch = curl_init();
 
     if ($this->debug) {
@@ -372,7 +372,7 @@ class Traxion {
     return $output;
   }
 
-  function get_response($response) {
+  private function get_response($response) {
     // if (!$this->debug) {
       $response = json_decode($response);
     // }
