@@ -219,7 +219,7 @@ class Traxion {
   }
 
   // TODO: Default values are from the documentation
-  function cash_in_gcash($username, $password, $amount, $paymentMethod = 'BOG', $paymentCategoryGroupID = 6, $institutionID = 584, $aggregatorID = 8) {
+  function cash_in_gcash($username, $password, $amount, $paymentMethod = 'BOG', $paymentCategoryID = 6, $institutionID = 584, $aggregatorID = 8) {
     $r = $this->login_thirdparty($username, $password);
     $accessToken = $r->data->accessToken;
     $secretKey = $r->data->secretKey;
@@ -239,7 +239,7 @@ class Traxion {
           'email' => '',
           'firstName' => '',
           'lastName' => '',
-          'paymentCategoryGroupID' => $paymentCategoryGroupID,
+          'paymentCategoryID' => $paymentCategoryID,
           'institutionID' => $institutionID,
           'aggregatorID' => $aggregatorID,
         )
