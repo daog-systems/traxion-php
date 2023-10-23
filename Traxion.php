@@ -281,13 +281,9 @@ class Traxion {
 
     $request_url = $this->url . "/api/v1/transactions/external/payment-categories/$categoryId/methods";
 
-    $params = array();
-    $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
-
-    $data = array('data' => $encrypted_data);
     $headers[] = 'Content-Type: application/json';
     $headers[] = 'Authorization: Bearer ' . $accessToken;
-    return $this->get_response($this->post($request_url, $data, $headers));
+    return $this->get_response($this->get($request_url, array(), $headers));
   }
 
   function payment_categories($username, $password) {
@@ -297,13 +293,9 @@ class Traxion {
 
     $request_url = $this->url . '/api/v1/transactions/external/payment-categories';
 
-    $params = array();
-    $encrypted_data = $this->params_to_encrypted_data($params, $secretKey);
-
-    $data = array('data' => $encrypted_data);
     $headers[] = 'Content-Type: application/json';
     $headers[] = 'Authorization: Bearer ' . $accessToken;
-    return $this->get_response($this->post($request_url, $data, $headers));
+    return $this->get_response($this->get($request_url, array(), $headers));
   }
 
   function transaction_history($username, $password, $page = 1, $limit = 25) {
