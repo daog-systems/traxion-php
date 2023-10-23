@@ -4,8 +4,7 @@ define('TRAXION_APPLICATION_ID', 1);
 
 class Traxion {
 
-  function __construct($debug = false) {
-    $this->debug = $debug;
+  function __construct() {
   }
 
   function init($url, $secretKey, $debug = false) {
