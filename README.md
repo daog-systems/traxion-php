@@ -46,6 +46,7 @@ The library provides methods for authentication and obtaining an access token:
 ```php
 // Authenticate with Traxion
 $response = $traxion->login_third_party($username, $password);
+
 // Get the access token
 $accessToken = $response->data->accessToken;
 ```
