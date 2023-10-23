@@ -8,7 +8,7 @@ class Traxion {
     $this->debug = $debug;
   }
 
-  function init($url, $secretKey, $debug) {
+  function init($url, $secretKey, $debug = false) {
     $this->url = $url;
     $this->secretKey = $secretKey;
     $this->debug = $debug;
